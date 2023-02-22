@@ -2,7 +2,13 @@ import React from 'react';
 import { HiHome } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-// import HeadButton from '../../components/button/HeadButton';
+import HeadButton from '../../components/common/HeadButton';
+
+const FILTERS = [
+  { id: 0, title: 'all' },
+  { id: 1, title: 'active' },
+  { id: 2, title: 'completed' },
+];
 
 export default function TodoHeader({ filters, currentFilter, onFilterChange }) {
   return (
@@ -10,8 +16,8 @@ export default function TodoHeader({ filters, currentFilter, onFilterChange }) {
       <Links to='/'>
         <HiHome className='home-logo' />
       </Links>
-      {/* <Filter>
-        {filters.map((filter) => {
+      <Filter>
+        {FILTERS.map(filter => {
           const isCurrent = currentFilter === filter.id;
           return (
             <FilterList key={filter.id}>
@@ -23,7 +29,7 @@ export default function TodoHeader({ filters, currentFilter, onFilterChange }) {
             </FilterList>
           );
         })}
-      </Filter> */}
+      </Filter>
     </TodoHead>
   );
 }
