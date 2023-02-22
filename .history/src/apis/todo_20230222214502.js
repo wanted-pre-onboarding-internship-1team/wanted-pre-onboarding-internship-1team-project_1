@@ -4,11 +4,6 @@ export default class TodoService {
     this.instance = instance;
   }
 
-  /**
-   *
-   * @param {string} todo
-   * @returns Promise<AxiosResponse<>>
-   */
   async createTodo(todo) {
     return await this.instance.post('/todos', { todo });
   }
@@ -17,13 +12,6 @@ export default class TodoService {
     return await this.instance.get('/todos');
   }
 
-  /**
-   *
-   * @param {string} id
-   * @param {string} todo
-   * @param {boolean} isCompleted
-   * @returns Promise<AxiosResponse<>>
-   */
   async updateTodo(id, todo, isCompleted) {
     return await this.instance.put(`/todos/${id}`, {
       todo,
@@ -31,11 +19,6 @@ export default class TodoService {
     });
   }
 
-  /**
-   *
-   * @param {string} id
-   * @returns
-   */
   async deleteTodo(id) {
     return await this.instance.delete(`/todos/${id}`);
   }
