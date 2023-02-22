@@ -9,10 +9,4 @@ export class AuthService {
       data: { email, password },
     });
   }
-
-  async signup(email, password) {
-    return await this.instance.post('/auth/signup', {
-      data: { email, password },
-    });
-  }
 }
