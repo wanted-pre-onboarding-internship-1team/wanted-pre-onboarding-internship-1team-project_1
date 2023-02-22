@@ -9,6 +9,7 @@ export default class AuthService {
   }
 
   async signup(email, password) {
+    console.log(email, password);
     return await this.instance.post('/auth/signup', {
       email,
       password,

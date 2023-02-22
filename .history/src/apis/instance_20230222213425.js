@@ -16,7 +16,6 @@ instance.interceptors.response.use(
     return res;
   },
   err => {
-    console.error(err);
     if (axios.isAxiosError(err)) {
       if (err.status === 404) alert('없는 페이지');
     }
