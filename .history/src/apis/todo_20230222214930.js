@@ -31,11 +31,6 @@ export default class TodoService {
     });
   }
 
-  /**
-   *
-   * @param {string} id
-   * @returns
-   */
   async deleteTodo(id) {
     return await this.instance.delete(`/todos/${id}`);
   }

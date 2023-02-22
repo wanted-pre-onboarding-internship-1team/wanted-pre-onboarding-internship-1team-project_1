@@ -8,18 +8,12 @@ export default class AuthService {
    *
    * @param {string} email
    * @param {string} password
-   * @returns Promise<AxiosResponse<>>
+   * @returns Promise<>
    */
   async signin(email, password) {
     return await this.instance.post('/auth/signin', { email, password });
   }
 
-  /**
-   *
-   * @param {string} email
-   * @param {string} password
-   * @returns Promise<AxiosResponse<>>
-   */
   async signup(email, password) {
     return await this.instance.post('/auth/signup', {
       email,
