@@ -7,7 +7,7 @@ import { FILTERS } from '../../const/filter';
 import { useFilterContext } from './FilterContext';
 
 export default function TodoHeader() {
-  const { currentFilter, setCurrentFilter, filterTitle } = useFilterContext();
+  const { currentFilter, setCurrentFilter } = useFilterContext();
 
   const onFilterChange = id => {
     setCurrentFilter(id);

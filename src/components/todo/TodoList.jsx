@@ -5,33 +5,43 @@ import styled from 'styled-components';
 import useApi from '../../hooks/useApi';
 import { api } from '../../apis/index';
 import { useTodoContext } from './TodoContext';
+import { useFilterContext } from './FilterContext';
 
-export default function TodoList({ currentFilter }) {
+export default function TodoList() {
   const { todos, setTodos } = useTodoContext();
+  const { currentFilter, setCurrentFilter, filterTitle } = useFilterContext();
 
   useEffect(() => {
     api.todo.getTodos().then(res => {
       setTodos(res.data);
+      setFilteredTodos(getFilteredItems(todos, currentFilter));
     });
+    console.log('get todolist from server');
   }, []);
 
+  const [filteredTodos, setFilteredTodos] = useState([]);
+
+  useEffect(() => {
+    setFilteredTodos(getFilteredItems(todos, currentFilter));
+    console.log('adjust filter');
+    console.log(filterTitle(currentFilter));
+  }, [currentFilter]);
+
   function getFilteredItems(todos, filter) {
-    if (filter === 0) {
-      return todos;
-    } else if (filter === 1) {
+    if (filterTitle(filter) === 'active') {
       return todos.filter(todo => todo.isCompleted === false);
-    } else {
+    }
+    if (filterTitle(filter) === 'completed') {
       return todos.filter(todo => todo.isCompleted === true);
     }
+    return todos;
   }
-
-  const filteredTodos = getFilteredItems(todos, 0);
 
   return (
     <Section>
       <AddTodo />
       <TodoBody>
-        {todos.map(todo => (
+        {filteredTodos.map(todo => (
           <Todo key={todo.id} todoObj={todo} />
         ))}
       </TodoBody>
