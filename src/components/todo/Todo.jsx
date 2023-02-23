@@ -40,8 +40,12 @@ export default function Todo({ todoObj }) {
     });
   };
   return (
-    <TodoLi key='1'>
-      <CheckBox type='checkbox' onClick={toggleIsChecked} checked={isChecked} />
+    <TodoLi key={id}>
+      <CheckBox
+        type='checkbox'
+        onChange={toggleIsChecked}
+        checked={isChecked}
+      />
       {isEditing ? (
         <Form onSubmit={handleSubmit}>
           <TodoInput
