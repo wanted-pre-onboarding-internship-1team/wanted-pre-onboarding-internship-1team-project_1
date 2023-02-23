@@ -7,15 +7,13 @@ import { api } from '../../apis/index';
 import { useTodoContext } from './TodoContext';
 
 export default function TodoList({ currentFilter }) {
-  const todoApi = api.todo;
-
   const { todos, setTodos } = useTodoContext();
-  const [{ data }] = useApi(todoApi.getTodos(), []);
 
   useEffect(() => {
-    if (!data) return;
-    setTodos(data);
-  }, [data]);
+    api.todo.getTodos().then(res => {
+      setTodos(res.data);
+    });
+  }, []);
 
   function getFilteredItems(todos, filter) {
     if (filter === 0) {
