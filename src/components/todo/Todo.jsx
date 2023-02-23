@@ -40,7 +40,7 @@ export default function Todo({ todoObj }) {
     });
   };
   return (
-    <TodoLi key={id}>
+    <TodoLi>
       <CheckBox
         type='checkbox'
         onChange={toggleIsChecked}

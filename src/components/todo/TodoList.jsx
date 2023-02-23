@@ -14,25 +14,22 @@ export default function TodoList() {
   useEffect(() => {
     api.todo.getTodos().then(res => {
       setTodos(res.data);
-      setFilteredTodos(getFilteredItems(todos, currentFilter));
+      setFilteredTodos(getFilteredItems(res.data, currentFilter));
     });
-    console.log('get todolist from server');
   }, []);
 
   const [filteredTodos, setFilteredTodos] = useState([]);
 
   useEffect(() => {
     setFilteredTodos(getFilteredItems(todos, currentFilter));
-    console.log('adjust filter');
-    console.log(filterTitle(currentFilter));
   }, [currentFilter]);
 
   function getFilteredItems(todos, filter) {
     if (filterTitle(filter) === 'active') {
-      return todos.filter(todo => todo.isCompleted === false);
+      return todos.filter(todo => todo.isChecked === false);
     }
     if (filterTitle(filter) === 'completed') {
-      return todos.filter(todo => todo.isCompleted === true);
+      return todos.filter(todo => todo.isChecked === true);
     }
     return todos;
   }
