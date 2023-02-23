@@ -1,27 +1,49 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FormInput from '../../components/common/input/FormInput';
 import FormButton from '../../components/common/button/FormButton';
 import styled from 'styled-components';
 import { api } from './../../apis/index';
 import { useNavigate } from 'react-router-dom';
+import { utilOnChange } from '../../utils/utilOnChange';
 
 export default function SignUp() {
-  const [inputValue, setInputValue] = useState({ text: '', password: '' });
+  const [inputValue, setInputValue] = useState({ email: '', password: '' });
+  const [btnState, setBtnState] = useState(false);
+  const [btnOpacity, setBtnOpacity] = useState(0.3);
+  const [guideEmailMsg, setGuideEmailMsg] = useState('');
+  const [guidePwMsg, setGuidePwMsg] = useState('');
   const navigate = useNavigate();
 
-  const onChange = e => {
-    const { type, value } = e.target;
+  useEffect(() => {
+    const checkEmail = inputValue.email.toString().includes('@');
+    const checkPassword = inputValue.password.length;
 
-    setInputValue(prevValue => ({ ...prevValue, [type]: value }));
-  };
+    if (checkEmail === true && checkPassword >= 8) {
+      setBtnState(false);
+      setBtnOpacity(1);
+    } else {
+      setBtnState(true);
+      setBtnOpacity(0.3);
+    }
+
+    if (checkEmail === false) {
+      setGuideEmailMsg('@를 포함한 올바른 이메일 형식을 입력해주세요');
+    } else {
+      setGuideEmailMsg('');
+    }
+
+    if (checkPassword < 8) {
+      setGuidePwMsg('비밀번호를 8자리 이상 입력해주세요');
+    } else {
+      setGuidePwMsg('');
+    }
+  }, [inputValue]);
 
   const onSubmit = async e => {
     e.preventDefault();
-
-    const { text, password } = inputValue;
-
+    const { email, password } = inputValue;
     api.auth
-      .signup(text, password)
+      .signup(email, password)
       .then(res => {
         alert('회원가입이 완료되었습니다 🙌');
         navigate('/signin');
@@ -36,34 +58,40 @@ export default function SignUp() {
         <InputInfo>어떤 이메일로 가입하시겠습니까?</InputInfo>
         <FormInput
           testId='email-input'
-          name='id'
+          name='email'
           type='text'
           placeholder='internship@wanted.co.kr'
           value={inputValue.text}
-          changeFunc={onChange}
+          changeFunc={event => {
+            utilOnChange(event, inputValue, setInputValue);
+          }}
         />
+        <GuideMsg>{guideEmailMsg}</GuideMsg>
         <InputInfo>
           비밀번호를 설정해주세요. <ValidatePw>8자 이상</ValidatePw>
         </InputInfo>
         <FormInput
           testId='password-input'
-          name='pw'
+          name='password'
           type='password'
           placeholder='비밀번호'
           value={inputValue.text}
-          changeFunc={onChange}
+          changeFunc={event => {
+            utilOnChange(event, inputValue, setInputValue);
+          }}
         />
+        <GuideMsg>{guidePwMsg}</GuideMsg>
         <FormButton
           testId='signup-button'
-          disabled={false}
-          opacity={1}
+          disabled={btnState}
+          opacity={btnOpacity}
           title='가입하기'
         />
       </FormSignUp>
       <GoLoginContainer>
         <GoLoginTitle>
           이미 계정이 있으신가요?
-          <GoLogin>로그인하기</GoLogin>
+          <GoLogin onClick={() => navigate('/signin')}>로그인하기</GoLogin>
         </GoLoginTitle>
       </GoLoginContainer>
     </>
@@ -115,3 +143,5 @@ const GoLogin = styled.span`
     cursor: pointer;
   }
 `;
+
+const GuideMsg = styled.p``;
