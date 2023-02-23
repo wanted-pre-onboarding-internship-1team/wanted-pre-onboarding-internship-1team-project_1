@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import Todo from './Todo';
 import AddTodo from './AddTodo';
 import styled from 'styled-components';
-import useApi from '../../hooks/useApi';
-import { api } from '../../apis/index';
+import { api } from '../../apis'; // index.js 는 진입점이므로 생략 가능
 import { useTodoContext } from './TodoContext';
 import { useFilterContext } from './FilterContext';
 
 export default function TodoList() {
   const { todos, setTodos } = useTodoContext();
-  const { currentFilter, setCurrentFilter, filterTitle } = useFilterContext();
+  const { currentFilter, filterTitle } = useFilterContext();
 
   useEffect(() => {
     api.todo.getTodos().then(res => {
@@ -26,10 +25,10 @@ export default function TodoList() {
 
   function getFilteredItems(todos, filter) {
     if (filterTitle(filter) === 'active') {
-      return todos.filter(todo => todo.isChecked === false);
+      return todos.filter(todo => todo.isCompleted === false);
     }
     if (filterTitle(filter) === 'completed') {
-      return todos.filter(todo => todo.isChecked === true);
+      return todos.filter(todo => todo.isCompleted === true);
     }
     return todos;
   }
