@@ -4,29 +4,24 @@ import FormButton from '../../components/common/button/FormButton';
 import styled from 'styled-components';
 import { api } from './../../apis/index';
 import { useNavigate } from 'react-router-dom';
+import { utilOnChange } from '../../utils/utilOnChange';
 
 export default function SignIn() {
-  const [inputValue, setInputValue] = useState({ text: '', password: '' });
+  const [inputValue, setInputValue] = useState({ email: '', password: '' });
   const navigate = useNavigate();
-
-  const onChange = e => {
-    const { type, value } = e.target;
-
-    setInputValue(prevValue => ({ ...prevValue, [type]: value }));
-  };
 
   const onSubmit = async e => {
     e.preventDefault();
 
-    const { text, password } = inputValue;
+    const { email, password } = inputValue;
 
     api.auth
-      .signin(text, password)
+      .signin(email, password)
       .then(res => {
         localStorage.setItem('token', res.data.access_token);
         navigate('/todo');
       })
-      .catch(err => alert(err.response.data.message));
+      .catch(err => alert('이메일 또는 비밀번호가 올바르지 않습니다.'));
   };
 
   return (
@@ -35,19 +30,23 @@ export default function SignIn() {
       <FormSignIn onSubmit={onSubmit}>
         <FormInput
           testId='email-input'
-          name='id'
+          name='email'
           type='text'
           placeholder='이메일'
           value={inputValue.text}
-          changeFunc={onChange}
+          changeFunc={event => {
+            utilOnChange(event, inputValue, setInputValue);
+          }}
         />
         <FormInput
           testId='password-input'
-          name='pw'
+          name='password'
           type='password'
           placeholder='비밀번호'
           value={inputValue.password}
-          changeFunc={onChange}
+          changeFunc={event => {
+            utilOnChange(event, inputValue, setInputValue);
+          }}
         />
         <FormButton
           testId='signin-button'
@@ -59,7 +58,7 @@ export default function SignIn() {
       <GoSignupContainer>
         <GoSignupTitle>
           계정이 없으신가요?
-          <GoSignup>가입하기</GoSignup>
+          <GoSignup onClick={() => navigate('/signup')}>가입하기</GoSignup>
         </GoSignupTitle>
       </GoSignupContainer>
     </>
