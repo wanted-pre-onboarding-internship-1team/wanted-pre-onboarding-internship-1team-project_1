@@ -5,10 +5,10 @@ export default function TodoInput({ testId, placeholder, value, changeFunc }) {
   return (
     <Input
       type='text'
-      //   data-testid={testId}
+      data-testid={testId}
       placeholder={placeholder}
-      //   value={value}
-      //   onChange={changeFunc}
+      value={value}
+      onChange={changeFunc}
     />
   );
 }
