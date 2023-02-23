@@ -3,7 +3,6 @@ import Todo from './Todo';
 import AddTodo from './AddTodo';
 import styled from 'styled-components';
 import useApi from '../../hooks/useApi';
-// import TodoService from '../../apis/todo';
 import { api } from '../../apis/index';
 import { useTodoContext } from '../../context/todoContext';
 
@@ -28,17 +27,13 @@ export default function TodoList({ currentFilter }) {
     }
   }
 
-  // const filteredTodos = [
-  //   { id: 1, todo: 'todo1' },
-  //   { id: 2, todo: 'todo2' },
-  // ];
   const filteredTodos = getFilteredItems(todos, 0);
 
   return (
     <Section>
       <AddTodo />
       <TodoBody>
-        {filteredTodos.map(todo => (
+        {todos.map(todo => (
           <Todo key={todo.id} todoObj={todo} />
         ))}
       </TodoBody>
