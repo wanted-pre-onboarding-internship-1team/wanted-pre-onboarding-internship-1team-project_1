@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import { FaTrashAlt } from 'react-icons/fa';
 import styled from 'styled-components';
 import TodoInput from '../../components/common/TodoInput';
+import { useTodoContext } from './TodoContext';
 
-export default function Todo({ todoObj, onUpdate, onDelete }) {
-  let isModify = false;
+export default function Todo({ todoObj }) {
+  const { id, todo, isCompleted } = todoObj;
+  const { updateTodo, deleteTodo } = useTodoContext();
+
   return (
     <TodoLi key='1'>
       <CheckBox type='checkbox' />
-      {isModify ? (
+      {isCompleted ? (
         <Form>
           <TodoInput testId='modify-input' />
           <Button type='submit' data-testid='submit-button'>

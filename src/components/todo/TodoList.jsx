@@ -2,17 +2,20 @@ import React, { useEffect, useState } from 'react';
 import Todo from './Todo';
 import AddTodo from './AddTodo';
 import styled from 'styled-components';
+import { useTodoContext } from './TodoContext';
 
 export default function TodoList({ currentFilter }) {
   const filteredTodos = [
     { id: 1, todo: 'todo1' },
     { id: 2, todo: 'todo2' },
   ];
+  const { todos, setTodos } = useTodoContext();
+  setTodos(filteredTodos);
 
   return (
     <Section>
       <TodoBody>
-        {filteredTodos.map(todo => (
+        {todos.map(todo => (
           <Todo key={todo.id} todoObj={todo} />
         ))}
       </TodoBody>
