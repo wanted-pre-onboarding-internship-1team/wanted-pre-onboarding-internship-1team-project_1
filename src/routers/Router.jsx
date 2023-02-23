@@ -1,6 +1,8 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import AuthRoute from './AuthRoute';
 import NonAuthRoute from './NonAuthRoute';
+import SignUp from './../pages/signUp/SignUp';
+import SignIn from './../pages/signIn/SignIn';
 
 export default function Router() {
   return (
@@ -10,8 +12,8 @@ export default function Router() {
         <Route path='/todo' element={<>todo페이지</>} />
       </Route>
       <Route element={<NonAuthRoute />}>
-        <Route path='/signup' element={<>회원가입페이지</>} />
-        <Route path='/signin' element={<>로그인페이지</>} />
+        <Route path='/signup' element={<SignUp />} />
+        <Route path='/signin' element={<SignIn />} />
       </Route>
     </Routes>
   );
