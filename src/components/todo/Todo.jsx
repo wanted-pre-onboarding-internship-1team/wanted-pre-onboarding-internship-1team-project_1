@@ -20,7 +20,7 @@ export default function Todo({ todoObj, onUpdate, onDelete }) {
         </Form>
       ) : (
         <>
-          <TodayWork>투두!</TodayWork>
+          <TodayWork>{todoObj.todo}</TodayWork>
           <Span>
             <Button data-testid='modify-button'>수정</Button>
             <Button data-testid='delete-button'>
