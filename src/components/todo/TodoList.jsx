@@ -21,7 +21,7 @@ export default function TodoList() {
 
   useEffect(() => {
     setFilteredTodos(getFilteredItems(todos, currentFilter));
-  }, [currentFilter]);
+  }, [todos, currentFilter]);
 
   function getFilteredItems(todos, filter) {
     if (filterTitle(filter) === 'active') {
