@@ -1,24 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FormInput from '../../components/common/input/FormInput';
 import FormButton from '../../components/common/button/FormButton';
 import styled from 'styled-components';
+import { api } from './../../apis/index';
+import { useNavigate } from 'react-router-dom';
 
 export default function SignIn() {
+  const [inputValue, setInputValue] = useState({ text: '', password: '' });
+  const navigate = useNavigate();
+
+  const onChange = e => {
+    const { type, value } = e.target;
+
+    setInputValue(prevValue => ({ ...prevValue, [type]: value }));
+  };
+
+  const onSubmit = async e => {
+    e.preventDefault();
+
+    const { text, password } = inputValue;
+
+    api.auth
+      .signin(text, password)
+      .then(res => {
+        localStorage.setItem('token', res.data.access_token);
+        navigate('/todo');
+      })
+      .catch(err => alert(err.response.data.message));
+  };
+
   return (
     <>
       <Title>로그인</Title>
-      <FormSignIn>
+      <FormSignIn onSubmit={onSubmit}>
         <FormInput
           testId='email-input'
           name='id'
           type='text'
           placeholder='이메일'
+          value={inputValue.text}
+          changeFunc={onChange}
         />
         <FormInput
           testId='password-input'
           name='pw'
           type='password'
           placeholder='비밀번호'
+          value={inputValue.password}
+          changeFunc={onChange}
         />
         <FormButton
           testId='signin-button'
