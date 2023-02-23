@@ -4,7 +4,7 @@ import AddTodo from './AddTodo';
 import styled from 'styled-components';
 import useApi from '../../hooks/useApi';
 import { api } from '../../apis/index';
-import { useTodoContext } from '../../context/todoContext';
+import { useTodoContext } from './TodoContext';
 
 export default function TodoList({ currentFilter }) {
   const todoApi = api.todo;
