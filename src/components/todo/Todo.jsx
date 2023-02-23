@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
 import { FaTrashAlt } from 'react-icons/fa';
 import styled from 'styled-components';
+import { api } from '../../apis';
 import TodoInput from '../../components/common/TodoInput';
 import { useTodoContext } from './TodoContext';
 
 export default function Todo({ todoObj }) {
   const { id, todo, isCompleted } = todoObj;
   const { updateTodo, deleteTodo } = useTodoContext();
-
+  const handleDelete = () => {
+    api.todo.deleteTodo(id).then(() => {
+      deleteTodo(id);
+    });
+  };
   return (
     <TodoLi key='1'>
       <CheckBox type='checkbox' />
-      {isCompleted ? (
+      {false ? (
         <Form>
           <TodoInput testId='modify-input' />
           <Button type='submit' data-testid='submit-button'>
@@ -26,7 +31,7 @@ export default function Todo({ todoObj }) {
           <TodayWork>{todoObj.todo}</TodayWork>
           <Span>
             <Button data-testid='modify-button'>수정</Button>
-            <Button data-testid='delete-button'>
+            <Button data-testid='delete-button' onClick={handleDelete}>
               <FaTrashAlt />
             </Button>
           </Span>
