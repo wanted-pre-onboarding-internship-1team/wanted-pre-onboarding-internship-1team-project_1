@@ -35,12 +35,12 @@ export default function TodoList() {
 
   return (
     <Section>
-      <AddTodo />
       <TodoBody>
         {filteredTodos.map(todo => (
           <Todo key={todo.id} todoObj={todo} />
         ))}
       </TodoBody>
+      <AddTodo />
     </Section>
   );
 }
