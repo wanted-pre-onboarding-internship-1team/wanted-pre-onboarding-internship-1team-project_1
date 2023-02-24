@@ -84,33 +84,45 @@ npm start
     └── utilOnChange.js
 
 ```
-### 코드 구조
- - todo
-    - todoList, filter 데이터의 setter, getter 를 깊은 depth 의 컴포넌트 끼리 공유하기 위해 ContextApi 사용
-    ```
-    [Provide]
-    <TodoProvider>
-      <FilterProvider>
-        <TodoHeader />
-        <TodoList />
-      </FilterProvider>
-    </TodoProvider>
 
-    [Consume]
-    const { todos, setTodos } = useTodoContext();
-    const { currentFilter, filterTitle } = useFilterContext();
-    ```
+### 코드 구조
+
+- todo
+
+  - todoList, filter 데이터의 setter, getter 를 깊은 depth 의 컴포넌트 끼리 공유하기 위해 ContextApi 사용
+
+  ```
+  [Provide]
+  <TodoProvider>
+    <FilterProvider>
+      <TodoHeader />
+      <TodoList />
+    </FilterProvider>
+  </TodoProvider>
+
+  [Consume]
+  const { todos, setTodos } = useTodoContext();
+  const { currentFilter, filterTitle } = useFilterContext();
+  ```
 
 ## Best Practice 산정
 
- - todo
-    - todoList state CRUD 관리에 useState 대신 useReduce를 사용했습니다.
-        - reduce 는 type 데이터와 switch 의 조합으로 todoLsit state CRUD 코드의 가독성을 높여줍니다. (CRUD 비즈니스 로직을 hook 내에서 관리)
-    - Filter 기능을 추가했습니다. (todoList View)
-        - all, active, completed 세 가지 필터가 있으며 버튼을 클릭해 필터링 된 결과를 볼 수 있습니다.
-            - all 은 모든 todo
-            - active 는 완료 안 된 todo
-            - completed 는 완료 된 (체크박스 표시) 만을 보여주도록 합니다.
+- auth
+
+  - 간단한 유효성 검사를 위해서 정규표현식을 사용하는 것은 불필요하다고 판단하여 `includes()`, `length()` 등의 메서드를 사용하여 유효성 검사를 진행했습니다.
+
+    - 각 메서드들이 하는 역할과 네이밍이 직관적이기 때문에 코드의 가독성을 높여줍니다.
+
+  - 에러 핸들링 처리를 통해 사용자에게 회원가입 성공/실패 유무를 알려줌으로써 사용자가 에러 발생 사실을 인지할 수 있습니다.
+
+- todo
+  - todoList state CRUD 관리에 useState 대신 useReduce를 사용했습니다.
+    - reduce 는 type 데이터와 switch 의 조합으로 todoLsit state CRUD 코드의 가독성을 높여줍니다. (CRUD 비즈니스 로직을 hook 내에서 관리)
+  - Filter 기능을 추가했습니다. (todoList View)
+    - all, active, completed 세 가지 필터가 있으며 버튼을 클릭해 필터링 된 결과를 볼 수 있습니다.
+      - all 은 모든 todo
+      - active 는 완료 안 된 todo
+      - completed 는 완료 된 (체크박스 표시) 만을 보여주도록 합니다.
 
 <br />
 
@@ -209,7 +221,6 @@ npm start
 
   - 수정 버튼에는 `data-testid="modify-button"` 속성을 부여해주세요
   - 삭제 버튼에는 `data-testid="delete-button"` 속성을 부여해주세요
-
 
 #### ✅ Assignment 9
 
