@@ -85,6 +85,17 @@ npm start
 
 ```
 
+## Best Practice 산정
+
+ - todo
+    - todoList state CRUD 관리에 useState 대신 useReduce를 사용했습니다.
+        - reduce 는 type 데이터와 switch 의 조합으로 todoLsit state CRUD 코드의 가독성을 높여줍니다. (CRUD 비즈니스 로직을 hook 내에서 관리)
+    - Filter 기능을 추가했습니다. (todoList View)
+        - all, active, completed 세 가지 필터가 있으며 버튼을 클릭해 필터링 된 결과를 볼 수 있습니다.
+            - all 은 모든 todo
+            - active 는 완료 안 된 todo
+            - completed 는 완료 된 (체크박스 표시) 만을 보여주도록 합니다.
+
 <br />
 
 ## 👏 협업 방법
