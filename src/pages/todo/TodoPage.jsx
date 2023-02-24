@@ -7,14 +7,8 @@ export default function todoPage() {
   return (
     <TodoProvider>
       <FilterProvider>
-        <TodoHeader
-        // filters={FILTERS}
-        // currentFilter={currentFilter}
-        // onFilterChange={setCurrentFilter}
-        />
-        <TodoList
-        //   currentFilter={currentFilter}
-        />
+        <TodoHeader />
+        <TodoList />
       </FilterProvider>
     </TodoProvider>
   );
