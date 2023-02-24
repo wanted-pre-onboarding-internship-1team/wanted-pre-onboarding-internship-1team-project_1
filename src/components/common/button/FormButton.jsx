@@ -6,8 +6,7 @@ export default function FormButton({ testId, disabled, opacity, title }) {
     <Button
       data-testid={testId}
       disabled={disabled}
-      style={{ opacity: opacity }}
-    >
+      style={{ opacity: opacity }}>
       {title}
     </Button>
   );
