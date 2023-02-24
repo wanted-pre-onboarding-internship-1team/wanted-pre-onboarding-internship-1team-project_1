@@ -3,14 +3,15 @@ import { HiHome } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import HeadButton from '../../components/common/HeadButton';
+import { FILTERS } from '../../const/filter';
+import { useFilterContext } from './FilterContext';
 
-const FILTERS = [
-  { id: 0, title: 'all' },
-  { id: 1, title: 'active' },
-  { id: 2, title: 'completed' },
-];
+export default function TodoHeader() {
+  const { currentFilter, setCurrentFilter } = useFilterContext();
 
-export default function TodoHeader({ filters, currentFilter, onFilterChange }) {
+  const onFilterChange = id => {
+    setCurrentFilter(id);
+  };
   return (
     <TodoHead>
       <Links to='/'>

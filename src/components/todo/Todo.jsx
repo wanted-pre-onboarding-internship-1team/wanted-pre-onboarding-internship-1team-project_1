@@ -15,6 +15,7 @@ export default function Todo({ todoObj }) {
   useEffect(() => {
     handleUpdate();
   }, [isChecked]);
+
   const handleChange = e => {
     setUserInput(e.target.value);
   };
@@ -36,12 +37,16 @@ export default function Todo({ todoObj }) {
   };
   const handleUpdate = event => {
     api.todo.updateTodo(id, userInput, isChecked).then(res => {
-      updateTodo({ id, todo: userInput, isChecked });
+      updateTodo({ id, todo: userInput, isCompleted: isChecked });
     });
   };
   return (
-    <TodoLi key='1'>
-      <CheckBox type='checkbox' onClick={toggleIsChecked} checked={isChecked} />
+    <TodoLi>
+      <CheckBox
+        type='checkbox'
+        onChange={toggleIsChecked}
+        checked={isChecked}
+      />
       {isEditing ? (
         <Form onSubmit={handleSubmit}>
           <TodoInput
