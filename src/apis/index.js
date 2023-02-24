@@ -9,6 +9,3 @@ export const api = {
   todo,
   auth,
 };
-
-//api.auth.signin('test@naver.com', '123123123');
-//api.auth.signup('test@naver.com', '123123123');
