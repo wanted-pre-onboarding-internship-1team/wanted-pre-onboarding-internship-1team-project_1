@@ -67,9 +67,7 @@ export default function SignUp() {
           }}
         />
         <GuideMsg>{guideEmailMsg}</GuideMsg>
-        <InputInfo>
-          비밀번호를 설정해주세요. <ValidatePw>8자 이상</ValidatePw>
-        </InputInfo>
+        <InputInfo>비밀번호를 설정해주세요.</InputInfo>
         <FormInput
           testId='password-input'
           name='password'
@@ -119,10 +117,6 @@ const InputInfo = styled.h2`
   margin-bottom: 10px;
 `;
 
-const ValidatePw = styled.span`
-  color: var(--color-accent);
-`;
-
 const GoLoginContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -144,4 +138,9 @@ const GoLogin = styled.span`
   }
 `;
 
-const GuideMsg = styled.p``;
+const GuideMsg = styled.p`
+  margin-bottom: 20px;
+  text-align: left;
+  font-size: 13px;
+  color: var(--color-accent);
+`;

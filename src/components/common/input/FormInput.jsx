@@ -24,5 +24,5 @@ export default function FormInput({
 const Input = styled.input`
   width: 300px;
   padding: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
