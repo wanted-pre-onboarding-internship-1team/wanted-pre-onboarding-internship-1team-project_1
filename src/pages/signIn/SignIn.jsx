@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FormInput from '../../components/common/input/FormInput';
 import FormButton from '../../components/common/button/FormButton';
 import styled from 'styled-components';
@@ -8,7 +8,36 @@ import { utilOnChange } from '../../utils/utilOnChange';
 
 export default function SignIn() {
   const [inputValue, setInputValue] = useState({ email: '', password: '' });
+  const [btnState, setBtnState] = useState(false);
+  const [btnOpacity, setBtnOpacity] = useState(0.3);
+  const [guideEmailMsg, setGuideEmailMsg] = useState('');
+  const [guidePwMsg, setGuidePwMsg] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkEmail = inputValue.email.toString().includes('@');
+    const checkPassword = inputValue.password.length;
+
+    if (checkEmail === true && checkPassword >= 8) {
+      setBtnState(false);
+      setBtnOpacity(1);
+    } else {
+      setBtnState(true);
+      setBtnOpacity(0.3);
+    }
+
+    if (checkEmail === false) {
+      setGuideEmailMsg('@를 포함한 올바른 이메일 형식을 입력해주세요');
+    } else {
+      setGuideEmailMsg('');
+    }
+
+    if (checkPassword < 8) {
+      setGuidePwMsg('비밀번호를 8자리 이상 입력해주세요');
+    } else {
+      setGuidePwMsg('');
+    }
+  }, [inputValue]);
 
   const onSubmit = async e => {
     e.preventDefault();
@@ -38,6 +67,7 @@ export default function SignIn() {
             utilOnChange(event, inputValue, setInputValue);
           }}
         />
+        <GuideMsg>{guideEmailMsg}</GuideMsg>
         <FormInput
           testId='password-input'
           name='password'
@@ -48,11 +78,12 @@ export default function SignIn() {
             utilOnChange(event, inputValue, setInputValue);
           }}
         />
+        <GuideMsg>{guidePwMsg}</GuideMsg>
         <FormButton
           testId='signin-button'
           title='로그인'
-          disabled={false}
-          opacity={1}
+          disabled={btnState}
+          opacity={btnOpacity}
         />
       </FormSignIn>
       <GoSignupContainer>
@@ -99,4 +130,11 @@ const GoSignup = styled.span`
   &:hover {
     cursor: pointer;
   }
+`;
+
+const GuideMsg = styled.p`
+  margin-bottom: 20px;
+  text-align: left;
+  font-size: 13px;
+  color: var(--color-accent);
 `;
