@@ -5,6 +5,7 @@ export default function FormInput({
   testId,
   name,
   type,
+  value,
   changeFunc,
   placeholder,
 }) {
@@ -13,6 +14,7 @@ export default function FormInput({
       data-testid={testId}
       name={name}
       type={type}
+      defaultValue={value}
       onChange={changeFunc}
       placeholder={placeholder}
     />
