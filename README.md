@@ -39,13 +39,13 @@ npm start
 ```
 📄 src
 ├── App.js
-├── apis
+├── apis # api 서버와 통신하는 비즈니스 로직
 │   ├── auth.js
 │   ├── index.js
 │   ├── instance.js
 │   └── todo.js
-├── components
-│   ├── common
+├── components # 각 pages 의 하위 컴포넌트
+│   ├── common # 공통 사용되는 컴포넌트
 │   │   ├── HeadButton.jsx
 │   │   ├── TodoInput.jsx
 │   │   ├── button
@@ -59,21 +59,21 @@ npm start
 │       ├── TodoContext.jsx
 │       ├── TodoHeader.jsx
 │       └── TodoList.jsx
-├── const
+├── const # 상수값을 정의
 │   └── filter.js
-├── hooks
+├── hooks # 공통으로 사용되는 기능 및 비즈니스 로직의 관심사를 분리
 │   ├── useApi.js
 │   ├── useFilter.js
 │   └── useTodo.js
 ├── index.js
-├── pages
+├── pages # route 경로 별로 pages 관리
 │   ├── signIn
 │   │   └── SignIn.jsx
 │   ├── signUp
 │   │   └── SignUp.jsx
 │   └── todo
 │       └── TodoPage.jsx
-├── routers
+├── routers # 라우터 설정 관련 컴포넌트
 │   ├── AuthRoute.jsx
 │   ├── NonAuthRoute.jsx
 │   └── Router.jsx
