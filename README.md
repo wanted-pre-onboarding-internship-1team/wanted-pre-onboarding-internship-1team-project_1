@@ -84,6 +84,22 @@ npm start
     └── utilOnChange.js
 
 ```
+### 코드 구조
+ - todo
+    - todoList, filter 데이터의 setter, getter 를 깊은 depth 의 컴포넌트 끼리 공유하기 위해 ContextApi 사용
+    ```
+    [Provide]
+    <TodoProvider>
+      <FilterProvider>
+        <TodoHeader />
+        <TodoList />
+      </FilterProvider>
+    </TodoProvider>
+
+    [Consume]
+    const { todos, setTodos } = useTodoContext();
+    const { currentFilter, filterTitle } = useFilterContext();
+    ```
 
 ## Best Practice 산정
 
