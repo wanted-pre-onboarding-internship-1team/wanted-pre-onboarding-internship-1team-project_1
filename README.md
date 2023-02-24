@@ -37,7 +37,7 @@ npm start
 ## 🎄 폴더 구조
 
 ```
-📄 sr
+📄 src
 ├── App.js
 ├── apis
 │   ├── auth.js
@@ -167,11 +167,14 @@ npm start
   - TODO 추가 button에는 `data-testid="new-todo-add-button"` 속성을 부여해주세요
 
 - 추가 button을 클릭하면 입력 input의 내용이 새로운 TODO로 추가되도록 해주세요
-  ![](https://user-images.githubusercontent.com/21123166/221085634-ae11e3e3-1157-4b9f-8316-495249305e76.gif)
+
+![](https://user-images.githubusercontent.com/21123166/221085634-ae11e3e3-1157-4b9f-8316-495249305e76.gif)
 
 #### ✅ Assignment 7
 
 - TODO의 체크박스를 통해 완료 여부를 수정할 수 있도록 해주세요.
+
+![](https://user-images.githubusercontent.com/66045666/221088046-a82b3bfc-7d0b-407b-b7d6-d21490d87ab7.gif)
 
 #### ✅ Assignment 8
 
@@ -180,11 +183,14 @@ npm start
   - 수정 버튼에는 `data-testid="modify-button"` 속성을 부여해주세요
   - 삭제 버튼에는 `data-testid="delete-button"` 속성을 부여해주세요
 
+
 #### ✅ Assignment 9
 
 - 투두 리스트의 삭제 기능을 구현해주세요
 
   - 투두 리스트의 TODO 우측의 삭제버튼을 누르면 해당 아이템이 삭제되도록 해주세요
+
+![](https://user-images.githubusercontent.com/66045666/221088054-5ac0be65-4e98-4dfd-81f2-f1eab5ab9b4a.gif)
 
 #### ✅ Assignment 10
 
@@ -199,6 +205,8 @@ npm start
     - 취소버튼에는 `data-testid="cancel-button"` 속성을 부여해주세요
   - 제출버튼을 누르면 수정한 내용을 제출해서 내용이 업데이트 될 수 있도록 해주세요
   - 취소버튼을 누르면 수정한 내용을 초기화 하고, 수정모드를 비활성화 해주세요
+
+![](https://user-images.githubusercontent.com/66045666/221089070-acfbffb9-f68e-40b0-ba1c-b5b21fea6628.gif)
 
 <br />
 
